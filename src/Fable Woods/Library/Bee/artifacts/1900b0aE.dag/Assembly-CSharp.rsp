@@ -353,8 +353,19 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Libraries/ModularFirstPersonController/FirstPersonController/FirstPersonController.cs"
-"Assets/Scripts/Character.cs"
-"Assets/Scripts/Sunlight.cs"
+"Assets/Scripts/Data/GameData.cs"
+"Assets/Scripts/Entities/Character.cs"
+"Assets/Scripts/Entities/Flower.cs"
+"Assets/Scripts/Entities/FlowerData.cs"
+"Assets/Scripts/Entities/FlowerEditor.cs"
+"Assets/Scripts/Entities/FlowerType.cs"
+"Assets/Scripts/InteractHint.cs"
+"Assets/Scripts/InventoryItemData.cs"
+"Assets/Scripts/Utilities/FadeHelper.cs"
+"Assets/Scripts/Utilities/ReadOnlyAttribute.cs"
+"Assets/Scripts/Utilities/ReadOnlyDrawer.cs"
+"Assets/Scripts/Utilities/Screenshot.cs"
+"Assets/Scripts/Utilities/Sunlight.cs"
 -langversion:9.0
 
 /deterministic
