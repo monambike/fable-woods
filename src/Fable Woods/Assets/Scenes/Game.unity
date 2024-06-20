@@ -732,9 +732,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1364711843}
-  - component: {fileID: 1364711844}
   - component: {fileID: 1364711845}
   - component: {fileID: 1364711846}
+  - component: {fileID: 1364711844}
+  - component: {fileID: 1364711847}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -824,6 +825,22 @@ CapsuleCollider:
   m_Height: 1.66
   m_Direction: 1
   m_Center: {x: 2.11, y: 0, z: -1.98}
+--- !u!114 &1364711847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364711842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404081c8f25ba9b4ba1df74deb9d5e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThisCamera: {fileID: 963194227}
+  scrollSpeed: 10
+  minZoom: 5
+  maxZoom: 20
 --- !u!1 &1365253859
 GameObject:
   m_ObjectHideFlags: 0
