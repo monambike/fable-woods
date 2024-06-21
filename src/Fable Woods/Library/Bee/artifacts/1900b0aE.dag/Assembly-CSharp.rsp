@@ -116,6 +116,7 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
+-define:ENABLE_INPUT_SYSTEM
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
 -define:UNITY_POST_PROCESSING_STACK_V2
@@ -331,6 +332,8 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Cinemachine.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/com.unity.cinemachine.editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.EditorCoroutines.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ForUI.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aE.dag/Unity.InputSystem.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Performance.Profile-Analyzer.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.PlasticSCM.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.Postprocessing.Editor.ref.dll"
@@ -357,14 +360,17 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll"
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.20f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
+"Assets/Input/DefaultPlayerActions.cs"
 "Assets/Libraries/AQUAS-Lite/Scripts/AQUAS_Lite_Camera.cs"
 "Assets/Libraries/AQUAS-Lite/Scripts/AQUAS_Lite_CamNav.cs"
 "Assets/Libraries/AQUAS-Lite/Scripts/AQUAS_Lite_Reflection.cs"
 "Assets/Libraries/ModularFirstPersonController/FirstPersonController/FirstPersonController.cs"
 "Assets/Libraries/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/MouseLook.cs"
 "Assets/Libraries/Polytope Studio/Lowpoly_Demos/Environment_Free/Helpers/PlayerMovement.cs"
+"Assets/Scripts/CameraManager.cs"
 "Assets/Scripts/CameraSwitch.cs"
-"Assets/Scripts/Data/GameData.cs"
+"Assets/Scripts/Data/DevelopersData.cs"
+"Assets/Scripts/Data/InGameData.cs"
 "Assets/Scripts/Data/SettingsData.cs"
 "Assets/Scripts/Entities/Character.cs"
 "Assets/Scripts/Entities/Flower.cs"

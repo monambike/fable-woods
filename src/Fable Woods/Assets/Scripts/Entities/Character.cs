@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Character : MonoBehaviour
 {
 
     private Rigidbody rb;
+
+    public CameraManager cameraManager;
 
     [Header("Movement")]
 
@@ -17,36 +20,67 @@ public class Character : MonoBehaviour
 
     private bool isWalking = false;
 
+    private InputAction _moveAction;
+
+    public DefaultPlayerActions defaultPlayerActions;
+
+    private void Awake()
+    {
+        defaultPlayerActions = new DefaultPlayerActions();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void OnChangeCamera(InputAction.CallbackContext callbackContext)
     {
-        
+        cameraManager.SwitchCamera(cameraManager.GetSwitchNextCamera());
+    }
+
+    private void OnEnable()
+    {
+        // Character movement.
+        _moveAction = defaultPlayerActions.Player.Move;
+        _moveAction.Enable();
+
+        defaultPlayerActions.Player.ChangeCamera.performed += OnChangeCamera;
+        defaultPlayerActions.Player.ChangeCamera.Enable();
+    }
+
+    private void OnDisable()
+    {
+        // Character movement.
+        _moveAction.Disable();
+
+        defaultPlayerActions.Player.ChangeCamera.performed -= OnChangeCamera;
+        defaultPlayerActions.Player.ChangeCamera.Disable();
     }
 
     private void FixedUpdate()
     {
+        var movementDirection = _moveAction.ReadValue<Vector2>();
+
         if (playerCanMove)
         {
-            var horizontalInput = Input.GetAxis("Horizontal");
+            var horizontalInput = movementDirection.x;
             if (SettingsData.InvertAxisX) horizontalInput *= 1;
 
-            var verticalInput = Input.GetAxis("Vertical");
+            var verticalInput = movementDirection.y;
             if (SettingsData.InvertAxisY) verticalInput *= -1;
 
-            // Calculate how fast we should be moving
-            Vector3 movementDirection = new(horizontalInput, 0, verticalInput);
-            movementDirection.Normalize();
-            
-            transform.Translate(movementDirection * walkSpeed * Time.deltaTime, Space.World);
+            // Getting moviment direction.
+            Vector3 movement = new(horizontalInput, 0, verticalInput);
+            movement.Normalize();
+            // Moving character.
+            rb.transform.Translate(movement * walkSpeed * Time.deltaTime, Space.World);
 
-            if (movementDirection != Vector3.zero)
+            // Updating character rotation according to movement.
+            if (movement != Vector3.zero)
             {
-                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+                var toRotation = Quaternion.LookRotation(movement, Vector3.up);
+                rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
         }
     }
