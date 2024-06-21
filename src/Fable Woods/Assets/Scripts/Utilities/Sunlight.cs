@@ -2,32 +2,44 @@ using UnityEngine;
 
 public class Sunlight : MonoBehaviour
 {
+    /// <summary>
+    /// Light responsible for the sunlight.
+    /// </summary>
     public Light directionalLight;
 
+    /// <summary>
+    /// Length of the day.
+    /// </summary>
     public float dayLengthInMinutes = 1.0f; // Duração do ciclo dia/noite em minutos
 
-    private float timeOfDay;
+    /// <summary>
+    /// Time of the day.
+    /// </summary>
+    private float currentTimeOfDay;
 
+    /// <summary>
+    /// Time multiplier based on day length.
+    /// </summary>
     private float timeMultiplier;
 
     void Start()
     {
-        timeMultiplier = 24.0f / (dayLengthInMinutes * 60.0f); // Converte para um ciclo de 24 horas
+        // Initializing time multiplier.
+        timeMultiplier = 24.0f / (dayLengthInMinutes * 60.0f);
     }
 
     void Update()
     {
-        timeOfDay += Time.deltaTime * timeMultiplier;
-        if (timeOfDay >= 24.0f)
-        {
-            timeOfDay = 0.0f;
-        }
+        // Recalculating time of the day based on delta time and time multiplier.
+        currentTimeOfDay += Time.deltaTime * timeMultiplier;
+        if (currentTimeOfDay >= 24.0f) currentTimeOfDay = 0.0f;
 
         UpdateLighting();
     }
     void UpdateLighting()
     {
-        float angle = (timeOfDay / 24.0f) * 360.0f - 90.0f; // Converte o tempo do dia para um ângulo
+        // Converting time of the day for light angle and setting in into the light.
+        float angle = (currentTimeOfDay / 24.0f) * 360.0f - 90.0f;
         directionalLight.transform.rotation = Quaternion.Euler(new Vector3(angle, 170, 0));
     }
 }

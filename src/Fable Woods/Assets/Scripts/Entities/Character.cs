@@ -13,6 +13,8 @@ public class Character : MonoBehaviour
     
     public float maxVelocityChange = 10f;
 
+    public float rotationSpeed = 500f;
+
     private bool isWalking = false;
 
     void Start()
@@ -29,25 +31,23 @@ public class Character : MonoBehaviour
     {
         if (playerCanMove)
         {
-            var horizontalInput = -Input.GetAxis("Horizontal");
+            var horizontalInput = Input.GetAxis("Horizontal");
             if (SettingsData.InvertAxisX) horizontalInput *= 1;
 
-            var verticalInput = -Input.GetAxis("Vertical");
+            var verticalInput = Input.GetAxis("Vertical");
             if (SettingsData.InvertAxisY) verticalInput *= -1;
 
             // Calculate how fast we should be moving
-            Vector3 targetVelocity = new(horizontalInput, 0, verticalInput);
+            Vector3 movementDirection = new(horizontalInput, 0, verticalInput);
+            movementDirection.Normalize();
+            
+            transform.Translate(movementDirection * walkSpeed * Time.deltaTime, Space.World);
 
-            targetVelocity = transform.TransformDirection(targetVelocity) * walkSpeed;
-
-            // Apply a force that attempts to reach our target velocity
-            Vector3 velocity = rb.velocity;
-            Vector3 velocityChange = targetVelocity - velocity;
-            velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-            velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-            velocityChange.y = 0;
-
-            rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            if (movementDirection != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 }
