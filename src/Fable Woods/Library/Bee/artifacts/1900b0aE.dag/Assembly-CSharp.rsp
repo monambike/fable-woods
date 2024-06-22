@@ -373,10 +373,13 @@
 "Assets/Scripts/Data/InGameData.cs"
 "Assets/Scripts/Data/SettingsData.cs"
 "Assets/Scripts/Entities/Character.cs"
+"Assets/Scripts/Entities/CharacterInfo.cs"
+"Assets/Scripts/Entities/Crop.cs"
 "Assets/Scripts/Entities/Flower.cs"
 "Assets/Scripts/Entities/FlowerData.cs"
 "Assets/Scripts/Entities/FlowerEditor.cs"
 "Assets/Scripts/Entities/FlowerType.cs"
+"Assets/Scripts/Entities/Item.cs"
 "Assets/Scripts/InteractHint.cs"
 "Assets/Scripts/InventoryItemData.cs"
 "Assets/Scripts/TitleScreen.cs"
@@ -384,7 +387,7 @@
 "Assets/Scripts/Utilities/ReadOnlyAttribute.cs"
 "Assets/Scripts/Utilities/ReadOnlyDrawer.cs"
 "Assets/Scripts/Utilities/Screenshot.cs"
-"Assets/Scripts/Utilities/Sunlight.cs"
+"Assets/Scripts/Utilities/TimeManager.cs"
 -langversion:9.0
 
 /deterministic

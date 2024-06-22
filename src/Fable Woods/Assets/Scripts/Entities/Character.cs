@@ -8,6 +8,16 @@ public class Character : MonoBehaviour
 
     public CameraManager cameraManager;
 
+    [Header("Audio")]
+
+    public AudioSource footstepsSource;
+
+    public AudioClip[] grassFootsteps;
+
+    public float stepDelay = 0.5f;
+
+    private float lastStepTime;
+
     [Header("Movement")]
 
     public bool playerCanMove = true;
@@ -18,7 +28,13 @@ public class Character : MonoBehaviour
 
     public float rotationSpeed = 500f;
 
+    public FootstepsType footstepsType;
+
+    [SerializeField]
     private bool isWalking = false;
+
+    [SerializeField]
+    private bool isSprinting = false;
 
     private InputAction _moveAction;
 
@@ -34,9 +50,33 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        footstepsSource.enabled = isWalking;
+        Footsteps();
+    }
+
     private void OnChangeCamera(InputAction.CallbackContext callbackContext)
     {
         cameraManager.SwitchCamera(cameraManager.GetSwitchNextCamera());
+    }
+
+    private void Footsteps()
+    {
+        if (Time.time - lastStepTime >= stepDelay)
+        {
+            int index = Random.Range(0, grassFootsteps.Length);
+            // Enable footsteps sound if player is walking.
+            footstepsSource.enabled = isWalking;
+
+            // If player is sprinting, make the footsteps sound faster.
+            if (isSprinting) footstepsSource.pitch = 1.5f;
+            // Otherwise, play footsteps sound at normal speed.
+            else footstepsSource.pitch = 1.0f;
+
+            footstepsSource.PlayOneShot(grassFootsteps[index]);
+            lastStepTime = Time.time;
+        }
     }
 
     private void OnEnable()
@@ -70,11 +110,14 @@ public class Character : MonoBehaviour
             var verticalInput = movementDirection.y;
             if (SettingsData.InvertAxisY) verticalInput *= -1;
 
-            // Getting moviment direction.
+            // Getting movement direction.
             Vector3 movement = new(horizontalInput, 0, verticalInput);
             movement.Normalize();
             // Moving character.
             rb.transform.Translate(movement * walkSpeed * Time.deltaTime, Space.World);
+
+            // Updating variable flag for walking.
+            isWalking = movement.x != 0 || movement.z != 0;
 
             // Updating character rotation according to movement.
             if (movement != Vector3.zero)
@@ -83,5 +126,11 @@ public class Character : MonoBehaviour
                 rb.transform.rotation = Quaternion.RotateTowards(rb.transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
         }
+    }
+
+    public enum FootstepsType
+    {
+        Grass,
+        Water
     }
 }
