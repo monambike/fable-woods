@@ -104,14 +104,8 @@ public class Character : MonoBehaviour
 
         if (playerCanMove)
         {
-            var horizontalInput = movementDirection.x;
-            if (SettingsData.InvertAxisX) horizontalInput *= 1;
-
-            var verticalInput = movementDirection.y;
-            if (SettingsData.InvertAxisY) verticalInput *= -1;
-
             // Getting movement direction.
-            Vector3 movement = new(horizontalInput, 0, verticalInput);
+            Vector3 movement = new(movementDirection.x, 0, movementDirection.y);
             movement.Normalize();
             // Moving character.
             rb.transform.Translate(movement * walkSpeed * Time.deltaTime, Space.World);
