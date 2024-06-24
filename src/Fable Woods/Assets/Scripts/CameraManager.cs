@@ -6,6 +6,8 @@ public class CameraManager : MonoBehaviour
 {
     public CinemachineVirtualCamera FarCamera;
 
+    //kldkjfcdksldkslk
+
     public CinemachineVirtualCamera CloseCamera;
 
     private CameraTypee currentCamera;
